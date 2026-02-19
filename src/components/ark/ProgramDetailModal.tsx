@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X, CheckCircle, Clock, Users, BookOpen, Target, Award,
-  ArrowRight, ChevronRight, GraduationCap, MessageCircle, Phone
+  ChevronRight, GraduationCap, MessageCircle, Phone
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -35,6 +35,12 @@ type Tab = typeof tabs[number];
 function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: () => void }) {
   const [activeTab, setActiveTab] = useState<Tab>("Overview");
 
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
   const handleEnquiry = () => {
     onClose();
     setTimeout(() => {
@@ -44,7 +50,11 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
   };
 
   return (
-    <>
+    /* ── Full-screen flex overlay — centres the modal ── */
+    <div
+      className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center"
+      style={{ padding: "0" }}
+    >
       {/* Backdrop */}
       <motion.div
         key="backdrop"
@@ -53,31 +63,38 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
         exit={{ opacity: 0 }}
         transition={{ duration: 0.22 }}
         onClick={onClose}
-        className="fixed inset-0 z-[9998] bg-black/70 backdrop-blur-md"
+        className="absolute inset-0 bg-ark-navy/80 backdrop-blur-md"
       />
 
-      {/* Modal — slides up from bottom on mobile, centered on desktop */}
+      {/* Modal panel */}
       <motion.div
         key="modal"
-        initial={{ opacity: 0, y: "100%" }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: "100%" }}
-        transition={{ duration: 0.38, ease: [0.32, 0.72, 0, 1] }}
-        className="fixed inset-x-0 bottom-0 z-[9999] flex flex-col bg-white rounded-t-3xl shadow-2xl
-                   md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2
-                   md:w-[90vw] md:max-w-4xl md:rounded-3xl md:bottom-auto
-                   h-[92vh] md:h-[88vh] max-h-[92vh]"
+        initial={{ opacity: 0, scale: 0.95, y: 40 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 40 }}
+        transition={{ duration: 0.32, ease: [0.32, 0.72, 0, 1] }}
+        className="
+          relative z-10 flex flex-col bg-white shadow-2xl
+          w-full max-w-full
+          sm:w-[92vw] sm:max-w-3xl
+          rounded-t-3xl sm:rounded-3xl
+          h-[92dvh] sm:h-auto sm:max-h-[88vh]
+          mx-0 sm:mx-4
+        "
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Drag handle (mobile only) */}
-        <div className="md:hidden flex justify-center pt-3 pb-1 flex-shrink-0">
+        <div className="sm:hidden flex justify-center pt-3 pb-1 flex-shrink-0">
           <div className="w-10 h-1 rounded-full bg-muted-foreground/30" />
         </div>
 
         {/* ── Header ── */}
-        <div className={`${program.color} relative flex-shrink-0`}>
+        <div className={`${program.color} relative flex-shrink-0 rounded-t-3xl sm:rounded-t-3xl overflow-hidden`}>
+          {/* Close button */}
           <button
             onClick={onClose}
             className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/25 hover:bg-white/50 flex items-center justify-center text-white transition-colors"
+            aria-label="Close"
           >
             <X className="w-5 h-5" />
           </button>
@@ -88,14 +105,14 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
               {program.subtitle}
             </span>
 
-            <h2 className="text-2xl md:text-3xl font-black text-white leading-tight mb-1.5">
+            <h2 className="text-2xl md:text-3xl font-black text-white leading-tight mb-1.5 pr-10">
               {program.title}
             </h2>
-            <p className="text-white/75 text-sm md:text-base leading-relaxed max-w-xl pr-8">
+            <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-xl pr-4">
               {program.tagline}
             </p>
 
-            {/* Stats */}
+            {/* Stats row */}
             <div className="flex flex-wrap gap-2 mt-4">
               {[
                 { icon: Users, label: program.ageGroup },
@@ -131,8 +148,8 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
           </div>
         </div>
 
-        {/* ── Tab Content ── */}
-        <div className="flex-1 overflow-y-auto overscroll-contain bg-white">
+        {/* ── Tab Content — scrollable ── */}
+        <div className="flex-1 overflow-y-auto overscroll-contain bg-white min-h-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -264,8 +281,8 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
           </AnimatePresence>
         </div>
 
-        {/* ── Footer CTA ── */}
-        <div className="flex-shrink-0 border-t border-border bg-white px-4 py-3 md:px-8 md:py-4">
+        {/* ── Footer CTA — always visible ── */}
+        <div className="flex-shrink-0 border-t border-border bg-white px-4 py-3 md:px-8 md:py-4 rounded-b-3xl">
           <div className="flex flex-col sm:flex-row gap-2.5">
             <Button
               onClick={handleEnquiry}
@@ -292,7 +309,7 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
           </div>
         </div>
       </motion.div>
-    </>
+    </div>
   );
 }
 
