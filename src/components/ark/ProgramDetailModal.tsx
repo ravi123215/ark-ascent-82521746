@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle, Clock, Users, BookOpen, Target, Award, ArrowRight } from "lucide-react";
+import {
+  X, CheckCircle, Clock, Users, BookOpen, Target, Award,
+  ArrowRight, ChevronRight, GraduationCap, MessageCircle, Phone
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface ProgramDetail {
@@ -19,17 +23,23 @@ export interface ProgramDetail {
   accentColor: string;
 }
 
-const iconMap: Record<string, React.ElementType> = {
-  CheckCircle, Clock, Users, BookOpen, Target, Award,
-};
-
 interface Props {
   program: ProgramDetail | null;
   onClose: () => void;
 }
 
+const tabs = ["Overview", "Highlights", "Curriculum", "Outcomes"] as const;
+type Tab = typeof tabs[number];
+
 export default function ProgramDetailModal({ program, onClose }: Props) {
+  const [activeTab, setActiveTab] = useState<Tab>("Overview");
+
   if (!program) return null;
+
+  const handleEnquiry = () => {
+    onClose();
+    setTimeout(() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" }), 250);
+  };
 
   return (
     <AnimatePresence>
@@ -41,140 +51,250 @@ export default function ProgramDetailModal({ program, onClose }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md"
           />
 
-          {/* Modal */}
+          {/* Modal Sheet — slides up from bottom on mobile, centered on desktop */}
           <motion.div
             key="modal"
-            initial={{ opacity: 0, y: 60, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.97 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="fixed inset-x-4 top-[4%] bottom-[4%] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-3xl z-50 flex flex-col bg-white rounded-3xl shadow-2xl overflow-hidden"
+            initial={{ opacity: 0, y: "100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "100%" }}
+            transition={{ duration: 0.38, ease: [0.32, 0.72, 0, 1] }}
+            className="fixed inset-x-0 bottom-0 z-50 flex flex-col bg-white rounded-t-3xl shadow-2xl
+                       md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2
+                       md:w-[90vw] md:max-w-4xl md:rounded-3xl md:bottom-auto
+                       h-[92vh] md:h-[88vh] max-h-[92vh]"
           >
-            {/* Header */}
-            <div className={`${program.color} p-6 md:p-8 relative`}>
+            {/* Drag handle (mobile only) */}
+            <div className="md:hidden flex justify-center pt-3 pb-1 flex-shrink-0">
+              <div className="w-10 h-1 rounded-full bg-muted-foreground/30" />
+            </div>
+
+            {/* ── Header ── */}
+            <div className={`${program.color} relative flex-shrink-0`}>
+              {/* Close button */}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-white transition-colors"
+                className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-white transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
-              <span className={`text-xs font-bold px-3 py-1 rounded-full ${program.accentColor} mb-3 inline-block`}>
-                {program.subtitle}
-              </span>
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-2">{program.title}</h2>
-              <p className="text-white/80 text-sm md:text-base">{program.tagline}</p>
 
-              {/* Quick stats */}
-              <div className="flex flex-wrap gap-4 mt-5">
-                <div className="flex items-center gap-2 bg-white/15 rounded-xl px-3 py-2">
-                  <Users className="w-4 h-4 text-white" />
-                  <span className="text-white text-xs font-semibold">{program.ageGroup}</span>
+              <div className="px-5 pt-5 pb-4 md:px-8 md:pt-7 md:pb-6">
+                {/* Badge */}
+                <span className="inline-flex items-center gap-1.5 bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">
+                  <GraduationCap className="w-3.5 h-3.5" />
+                  {program.subtitle}
+                </span>
+
+                <h2 className="text-2xl md:text-3xl font-black text-white leading-tight mb-1.5">
+                  {program.title}
+                </h2>
+                <p className="text-white/75 text-sm md:text-base leading-relaxed max-w-xl">
+                  {program.tagline}
+                </p>
+
+                {/* Stats row */}
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {[
+                    { icon: Users, label: program.ageGroup },
+                    { icon: Clock, label: program.duration },
+                    { icon: BookOpen, label: program.batchSize },
+                  ].map(({ icon: Icon, label }) => (
+                    <div
+                      key={label}
+                      className="flex items-center gap-1.5 bg-white/15 border border-white/20 rounded-xl px-3 py-1.5"
+                    >
+                      <Icon className="w-3.5 h-3.5 text-white/80" />
+                      <span className="text-white text-xs font-semibold">{label}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center gap-2 bg-white/15 rounded-xl px-3 py-2">
-                  <Clock className="w-4 h-4 text-white" />
-                  <span className="text-white text-xs font-semibold">{program.duration}</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/15 rounded-xl px-3 py-2">
-                  <BookOpen className="w-4 h-4 text-white" />
-                  <span className="text-white text-xs font-semibold">{program.batchSize}</span>
+
+                {/* Tab bar */}
+                <div className="flex gap-1 mt-5 -mb-px">
+                  {tabs.map((tab) => (
+                    <button
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      className={`px-3 md:px-4 py-2 text-xs md:text-sm font-bold rounded-t-xl transition-all duration-200 ${
+                        activeTab === tab
+                          ? "bg-white text-ark-navy"
+                          : "text-white/70 hover:text-white hover:bg-white/10"
+                      }`}
+                    >
+                      {tab}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Scrollable body */}
-            <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
-
-              {/* About */}
-              <div>
-                <h3 className="text-lg font-black text-ark-navy mb-3">About This Program</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{program.description}</p>
-              </div>
-
-              {/* Highlights */}
-              <div>
-                <h3 className="text-lg font-black text-ark-navy mb-4">Program Highlights</h3>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {program.highlights.map((h, i) => (
-                    <div key={i} className="flex items-start gap-3 bg-muted/40 rounded-xl p-3">
-                      <CheckCircle className="w-4 h-4 text-ark-yellow mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-ark-navy font-medium">{h}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Features */}
-              {program.features.length > 0 && (
-                <div>
-                  <h3 className="text-lg font-black text-ark-navy mb-4">What Makes It Special</h3>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {program.features.map((f, i) => (
-                      <div key={i} className="border border-muted rounded-xl p-4">
-                        <div className="w-9 h-9 rounded-lg bg-ark-navy flex items-center justify-center mb-3">
-                          <Target className="w-4 h-4 text-white" />
-                        </div>
-                        <h4 className="font-bold text-ark-navy text-sm mb-1">{f.title}</h4>
-                        <p className="text-muted-foreground text-xs">{f.desc}</p>
+            {/* ── Tab Content ── */}
+            <div className="flex-1 overflow-y-auto overscroll-contain bg-white">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -16 }}
+                  transition={{ duration: 0.2 }}
+                  className="p-5 md:p-8"
+                >
+                  {/* ── OVERVIEW TAB ── */}
+                  {activeTab === "Overview" && (
+                    <div className="space-y-6">
+                      <div className="bg-muted/40 rounded-2xl p-5">
+                        <h3 className="text-base font-black text-ark-navy mb-2">About This Program</h3>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{program.description}</p>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
-              {/* Curriculum */}
-              {program.curriculum.length > 0 && (
-                <div>
-                  <h3 className="text-lg font-black text-ark-navy mb-4">Curriculum Overview</h3>
-                  <div className="space-y-3">
-                    {program.curriculum.map((c, i) => (
-                      <div key={i} className="border-l-4 border-ark-yellow pl-4 py-1">
-                        <div className="font-bold text-ark-navy text-sm mb-1">{c.subject}</div>
-                        <div className="flex flex-wrap gap-2">
-                          {c.topics.map((t, j) => (
-                            <span key={j} className="text-xs bg-ark-yellow/10 text-ark-navy px-2 py-0.5 rounded-full">{t}</span>
+                      <div>
+                        <h3 className="text-base font-black text-ark-navy mb-4">What Makes It Special</h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {program.features.map((f, i) => (
+                            <div
+                              key={i}
+                              className="flex gap-3 p-4 border border-border rounded-2xl hover:border-ark-yellow/50 hover:bg-ark-yellow/5 transition-colors"
+                            >
+                              <div className="w-9 h-9 rounded-xl bg-ark-navy flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <Target className="w-4 h-4 text-white" />
+                              </div>
+                              <div>
+                                <h4 className="font-bold text-ark-navy text-sm mb-1">{f.title}</h4>
+                                <p className="text-muted-foreground text-xs leading-relaxed">{f.desc}</p>
+                              </div>
+                            </div>
                           ))}
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Outcomes */}
-              <div>
-                <h3 className="text-lg font-black text-ark-navy mb-4">Learning Outcomes</h3>
-                <div className="space-y-2">
-                  {program.outcomes.map((o, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <ArrowRight className="w-4 h-4 text-ark-pink mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-muted-foreground">{o}</span>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  )}
+
+                  {/* ── HIGHLIGHTS TAB ── */}
+                  {activeTab === "Highlights" && (
+                    <div>
+                      <p className="text-muted-foreground text-sm mb-5">
+                        Everything included in the <span className="font-bold text-ark-navy">{program.title}</span> program:
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {program.highlights.map((h, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.04 }}
+                            className="flex items-start gap-3 bg-white border border-border rounded-2xl p-3.5 hover:border-ark-yellow/60 hover:shadow-sm transition-all"
+                          >
+                            <div className="w-6 h-6 rounded-full bg-ark-yellow/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <CheckCircle className="w-3.5 h-3.5 text-ark-navy" />
+                            </div>
+                            <span className="text-sm text-ark-navy font-medium leading-snug">{h}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ── CURRICULUM TAB ── */}
+                  {activeTab === "Curriculum" && (
+                    <div className="space-y-4">
+                      <p className="text-muted-foreground text-sm mb-2">
+                        Structured curriculum for <span className="font-bold text-ark-navy">{program.ageGroup}</span>:
+                      </p>
+                      {program.curriculum.map((c, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.07 }}
+                          className="rounded-2xl border border-border overflow-hidden"
+                        >
+                          <div className="flex items-center gap-3 px-4 py-3 bg-ark-navy">
+                            <div className="w-6 h-6 rounded-full bg-ark-yellow flex items-center justify-center flex-shrink-0">
+                              <span className="text-ark-navy text-xs font-black">{i + 1}</span>
+                            </div>
+                            <span className="text-white font-bold text-sm">{c.subject}</span>
+                          </div>
+                          <div className="p-4 flex flex-wrap gap-2 bg-muted/20">
+                            {c.topics.map((t, j) => (
+                              <span
+                                key={j}
+                                className="text-xs bg-white border border-ark-yellow/30 text-ark-navy font-medium px-3 py-1 rounded-full shadow-sm"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* ── OUTCOMES TAB ── */}
+                  {activeTab === "Outcomes" && (
+                    <div>
+                      <p className="text-muted-foreground text-sm mb-5">
+                        What students achieve after completing this program:
+                      </p>
+                      <div className="space-y-3">
+                        {program.outcomes.map((o, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -12 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.06 }}
+                            className="flex items-start gap-4 p-4 rounded-2xl bg-gradient-to-r from-ark-navy/5 to-transparent border border-border"
+                          >
+                            <div className="w-7 h-7 rounded-full bg-ark-pink flex items-center justify-center flex-shrink-0">
+                              <ChevronRight className="w-4 h-4 text-white" />
+                            </div>
+                            <span className="text-sm text-ark-navy font-medium leading-relaxed">{o}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* Mini CTA inside outcomes */}
+                      <div className="mt-6 p-4 rounded-2xl bg-ark-navy text-white text-center">
+                        <Award className="w-8 h-8 text-ark-yellow mx-auto mb-2" />
+                        <p className="font-bold text-sm">Ready to achieve these results?</p>
+                        <p className="text-white/60 text-xs mt-1">Book a free assessment with our counsellors today.</p>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-            {/* Footer CTA */}
-            <div className="border-t border-muted p-5 flex flex-col sm:flex-row gap-3">
-              <Button
-                className="flex-1 bg-ark-yellow text-ark-navy font-bold shadow-yellow hover:bg-ark-yellow-light"
-                onClick={() => {
-                  onClose();
-                  setTimeout(() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" }), 200);
-                }}
-              >
-                Book Free Assessment
-              </Button>
-              <a
-                href="https://wa.me/919876543210"
-                className="flex-1 flex items-center justify-center gap-2 border-2 border-ark-navy text-ark-navy font-bold rounded-md py-2 text-sm hover:bg-ark-navy hover:text-white transition-colors"
-              >
-                Enquire on WhatsApp
-              </a>
+            {/* ── Footer CTA ── */}
+            <div className="flex-shrink-0 border-t border-border bg-white px-4 py-3 md:px-8 md:py-4">
+              <div className="flex flex-col sm:flex-row gap-2.5">
+                <Button
+                  onClick={handleEnquiry}
+                  className="flex-1 bg-ark-yellow hover:bg-ark-yellow-light text-ark-navy font-black text-sm h-11 shadow-yellow rounded-xl"
+                >
+                  Book Free Assessment
+                </Button>
+                <a
+                  href="https://wa.me/919876543210"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 h-11 border-2 border-ark-navy text-ark-navy font-bold text-sm rounded-xl hover:bg-ark-navy hover:text-white transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp Us
+                </a>
+                <a
+                  href="tel:+919876543210"
+                  className="sm:hidden flex items-center justify-center gap-2 h-11 border-2 border-muted text-muted-foreground font-bold text-sm rounded-xl hover:border-ark-navy hover:text-ark-navy transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  Call Now
+                </a>
+              </div>
             </div>
           </motion.div>
         </>
