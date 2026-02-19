@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Baby, BookOpen, GraduationCap, FlaskConical, RotateCcw, Sun } from "lucide-react";
+import { ArrowRight, Star, Baby, BookOpen, GraduationCap, FlaskConical, RotateCcw } from "lucide-react";
+import ProgramDetailModal from "@/components/ark/ProgramDetailModal";
+import { programDetails } from "@/data/programDetails";
+import type { ProgramDetail } from "@/components/ark/ProgramDetailModal";
 
 const programs = [
   {
@@ -10,7 +14,6 @@ const programs = [
     badge: "Ages 3–7",
     color: "border-ark-pink",
     badgeColor: "bg-ark-pink/10 text-ark-pink",
-    href: "#",
   },
   {
     icon: BookOpen,
@@ -20,7 +23,6 @@ const programs = [
     badge: "All Boards",
     color: "border-ark-yellow",
     badgeColor: "bg-ark-yellow/10 text-ark-yellow-dark",
-    href: "#",
   },
   {
     icon: Star,
@@ -30,7 +32,6 @@ const programs = [
     badge: "Boards Focused",
     color: "border-ark-navy",
     badgeColor: "bg-ark-navy/10 text-ark-navy",
-    href: "#",
   },
   {
     icon: FlaskConical,
@@ -40,7 +41,6 @@ const programs = [
     badge: "Class 11–12",
     color: "border-ark-yellow",
     badgeColor: "bg-ark-yellow/10 text-ark-yellow-dark",
-    href: "#",
   },
   {
     icon: GraduationCap,
@@ -50,7 +50,6 @@ const programs = [
     badge: "Class 8–10",
     color: "border-ark-pink",
     badgeColor: "bg-ark-pink/10 text-ark-pink",
-    href: "#",
   },
   {
     icon: RotateCcw,
@@ -60,11 +59,12 @@ const programs = [
     badge: "Crash Program",
     color: "border-ark-navy",
     badgeColor: "bg-ark-navy/10 text-ark-navy",
-    href: "#",
   },
 ];
 
 export default function ProgramsSection() {
+  const [selectedProgram, setSelectedProgram] = useState<ProgramDetail | null>(null);
+
   return (
     <section id="programs" className="section-padding bg-muted/30">
       <div className="container-ark">
@@ -114,7 +114,10 @@ export default function ProgramsSection() {
                 {program.description}
               </p>
 
-              <button className="flex items-center gap-2 text-ark-navy font-bold text-sm group-hover:text-ark-yellow transition-colors">
+              <button
+                onClick={() => setSelectedProgram(programDetails[program.title] ?? null)}
+                className="flex items-center gap-2 text-ark-navy font-bold text-sm group-hover:text-ark-yellow transition-colors"
+              >
                 Explore Program
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -122,6 +125,12 @@ export default function ProgramsSection() {
           ))}
         </div>
       </div>
+
+      {/* Program Detail Modal */}
+      <ProgramDetailModal
+        program={selectedProgram}
+        onClose={() => setSelectedProgram(null)}
+      />
     </section>
   );
 }

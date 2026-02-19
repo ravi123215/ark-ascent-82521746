@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import arkLogo from "@/assets/ark-logo.jpeg";
 
 const programs = [
   { label: "ARK Nestlings", href: "#programs" },
@@ -45,10 +46,12 @@ export default function Navbar() {
       >
         <div className="container-ark flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-ark-yellow flex items-center justify-center font-black text-ark-navy text-xl shadow-yellow">
-              ARK
-            </div>
+          <a href="#" className="flex items-center gap-2">
+            <img
+              src={arkLogo}
+              alt="ARK Learning Arena Logo"
+              className="w-12 h-12 rounded-xl object-cover shadow-yellow"
+            />
             <div>
               <div className="text-white font-bold text-lg leading-tight">ARK Learning Arena</div>
               <div className="text-ark-yellow text-xs font-medium tracking-wider">DISCIPLINE MEETS DIRECTION</div>
