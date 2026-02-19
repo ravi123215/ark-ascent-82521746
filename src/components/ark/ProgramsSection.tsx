@@ -126,11 +126,12 @@ export default function ProgramsSection() {
         </div>
       </div>
 
-      {/* Program Detail Modal */}
+      {/* Program Detail Modal — rendered via portal outside section */}
       <ProgramDetailModal
         program={selectedProgram}
         onClose={() => setSelectedProgram(null)}
       />
     </section>
+
   );
 }
