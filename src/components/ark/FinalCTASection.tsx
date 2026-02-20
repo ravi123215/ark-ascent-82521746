@@ -39,14 +39,14 @@ export default function FinalCTASection() {
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <a
-              href="tel:+919876543210"
+              href="tel:+917639399217"
               className="flex items-center gap-2 text-white border-2 border-white/30 hover:border-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors"
             >
               <Phone className="w-5 h-5" />
               Call Now
             </a>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/917639399217?text=Hi%2C%20I%27m%20serious%20about%20my%20child%27s%20academic%20growth.%20Can%20we%20discuss%20enrollment%3F"
               className="flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white transition-colors"
             >
               <MessageCircle className="w-5 h-5" />

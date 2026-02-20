@@ -109,11 +109,11 @@ export default function Navbar() {
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href="tel:+919876543210"
+              href="tel:+917639399217"
               className="flex items-center gap-2 text-white/80 hover:text-ark-yellow text-sm transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span>+91 98765 43210</span>
+              <span>+91 76393 99217</span>
             </a>
             <Button
               className="bg-ark-yellow text-ark-navy font-bold hover:bg-ark-yellow-light shadow-yellow px-5"
@@ -173,7 +173,7 @@ export default function Navbar() {
                     Book Free Assessment
                   </Button>
                   <a
-                    href="https://wa.me/919876543210"
+                    href="https://wa.me/917639399217?text=Hi%2C%20I%20found%20ARK%20Learning%20Arena%20online.%20I%27d%20like%20to%20know%20more%20about%20your%20programs."
                     className="flex items-center justify-center gap-2 py-3 rounded-xl border border-green-400 text-green-400 font-medium"
                   >
                     <MessageCircle className="w-5 h-5" />
@@ -189,7 +189,7 @@ export default function Navbar() {
       {/* Mobile sticky bottom CTA */}
       <div className="mobile-cta-sticky lg:hidden bg-ark-navy border-t border-white/10 flex">
         <a
-          href="tel:+919876543210"
+          href="tel:+917639399217"
           className="flex-1 flex items-center justify-center gap-2 py-4 text-white font-semibold text-sm border-r border-white/10"
         >
           <Phone className="w-5 h-5 text-ark-yellow" />

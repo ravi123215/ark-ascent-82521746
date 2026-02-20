@@ -35,9 +35,9 @@ export default function Footer() {
 
             {/* Contact */}
             <div className="space-y-3">
-              <a href="tel:+919876543210" className="flex items-center gap-3 text-white/70 hover:text-ark-yellow transition-colors text-sm">
+              <a href="tel:+917639399217" className="flex items-center gap-3 text-white/70 hover:text-ark-yellow transition-colors text-sm">
                 <Phone className="w-4 h-4 text-ark-yellow flex-shrink-0" />
-                +91 98765 43210
+                +91 76393 99217
               </a>
               <a href="mailto:info@tuitionwithark.com" className="flex items-center gap-3 text-white/70 hover:text-ark-yellow transition-colors text-sm">
                 <Mail className="w-4 h-4 text-ark-yellow flex-shrink-0" />
@@ -94,7 +94,7 @@ export default function Footer() {
             </div>
           </div>
           <a
-            href="https://wa.me/919876543210"
+            href="https://wa.me/917639399217?text=Hi%2C%20I%20need%20help%20with%20admissions%20at%20ARK%20Learning%20Arena."
             className="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-xl transition-colors flex items-center gap-2"
           >
             <MessageCircle className="w-5 h-5" />

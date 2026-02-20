@@ -291,7 +291,7 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
               Book Free Assessment
             </Button>
             <a
-              href="https://wa.me/919876543210"
+              href={`https://wa.me/917639399217?text=${encodeURIComponent(`Hi, I'm interested in the ${program.title} program at ARK Learning Arena. Can you share more details?`)}`}
               target="_blank"
               rel="noreferrer"
               className="flex-1 flex items-center justify-center gap-2 h-11 border-2 border-ark-navy text-ark-navy font-bold text-sm rounded-xl hover:bg-ark-navy hover:text-white transition-colors"
@@ -300,7 +300,7 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
               WhatsApp Us
             </a>
             <a
-              href="tel:+919876543210"
+              href="tel:+917639399217"
               className="sm:hidden flex items-center justify-center gap-2 h-11 border-2 border-muted text-muted-foreground font-bold text-sm rounded-xl hover:border-ark-navy hover:text-ark-navy transition-colors"
             >
               <Phone className="w-4 h-4" />
