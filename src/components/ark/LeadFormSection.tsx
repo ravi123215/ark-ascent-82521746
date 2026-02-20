@@ -88,7 +88,7 @@ export default function LeadFormSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="bg-gradient-hero rounded-3xl p-8 shadow-card-hover">
-              <h3 className="text-white text-2xl font-black mb-2">Book Free Assessment</h3>
+              <h3 className="text-white text-2xl font-black mb-2">Book Free Academic Assessment</h3>
               <p className="text-white/60 text-sm mb-6">Fill in your details and we'll call you within 24 hours.</p>
 
               {submitted ? (
@@ -153,7 +153,7 @@ export default function LeadFormSection() {
                     type="submit"
                     className="w-full bg-ark-yellow text-ark-navy font-black hover:bg-ark-yellow-light shadow-yellow py-6 text-base mt-2"
                   >
-                    Book My Free Assessment
+                    Book Free Academic Assessment
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
 

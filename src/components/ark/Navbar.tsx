@@ -116,10 +116,17 @@ export default function Navbar() {
               <span>+91 76393 99217</span>
             </a>
             <Button
+              className="border border-ark-navy text-ark-navy bg-white font-semibold hover:scale-105 hover:shadow-md transition-transform px-5"
+              onClick={() => (window.location.href = "/partner-with-ark")}
+            >
+              PARTNER WITH ARK
+            </Button>
+
+            <Button
               className="bg-ark-yellow text-ark-navy font-bold hover:bg-ark-yellow-light shadow-yellow px-5"
               onClick={() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })}
             >
-              Book Assessment
+              Book Free Academic Assessment
             </Button>
           </div>
 
@@ -170,7 +177,16 @@ export default function Navbar() {
                       document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" });
                     }}
                   >
-                    Book Free Assessment
+                    Book Free Academic Assessment
+                  </Button>
+                  <Button
+                    className="border border-ark-navy text-ark-navy bg-white font-semibold w-full hover:scale-105 hover:shadow-md transition-transform"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      window.location.href = "/partner-with-ark";
+                    }}
+                  >
+                    PARTNER WITH ARK
                   </Button>
                   <a
                     href="https://wa.me/917639399217?text=Hi%2C%20I%20found%20ARK%20Learning%20Arena%20online.%20I%27d%20like%20to%20know%20more%20about%20your%20programs."
@@ -199,7 +215,7 @@ export default function Navbar() {
           onClick={() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })}
           className="flex-1 flex items-center justify-center gap-2 py-4 bg-ark-yellow text-ark-navy font-bold text-sm"
         >
-          Book Assessment
+          Book Free Academic Assessment
         </button>
       </div>
     </>

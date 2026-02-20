@@ -35,7 +35,7 @@ export default function FinalCTASection() {
               className="bg-ark-yellow text-ark-navy font-black hover:bg-ark-yellow-light shadow-yellow group px-10 py-6 text-lg"
               onClick={() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })}
             >
-              Book Free Assessment
+              Book Free Academic Assessment
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <a
