@@ -64,14 +64,14 @@ export default function LeadFormSection() {
 
             <div className="flex flex-wrap gap-4">
               <a
-                href="tel:+919876543210"
+                href="tel:+917639399217"
                 className="flex items-center gap-2 text-ark-navy border-2 border-ark-navy px-5 py-3 rounded-xl font-semibold hover:bg-ark-navy hover:text-white transition-colors"
               >
                 <Phone className="w-5 h-5" />
                 Call Now
               </a>
               <a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/917639399217?text=Hi%2C%20I%27d%20like%20to%20book%20a%20free%20academic%20assessment%20for%20my%20child."
                 className="flex items-center gap-2 text-white bg-green-500 px-5 py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
