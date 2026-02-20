@@ -52,8 +52,7 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
   return (
     /* ── Full-screen flex overlay — centres the modal ── */
     <div
-      className="fixed inset-0 z-[9999] flex items-stretch sm:items-center justify-center"
-      style={{ padding: "0" }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4"
     >
       {/* Backdrop */}
       <motion.div
@@ -75,22 +74,15 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
         transition={{ duration: 0.32, ease: [0.32, 0.72, 0, 1] }}
         className="
           relative z-10 flex flex-col bg-white shadow-2xl
-          w-full max-w-full
-          sm:w-[92vw] sm:max-w-3xl
-          rounded-none sm:rounded-3xl
-          h-[100dvh] sm:h-auto sm:max-h-[88vh]
-          mx-0 sm:mx-4
+          w-full max-w-3xl
+          rounded-3xl
+          max-h-[calc(100dvh-24px)] sm:max-h-[88vh]
           overflow-hidden
         "
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Drag handle (mobile only) */}
-        <div className="sm:hidden flex justify-center pt-2 pb-1 flex-shrink-0">
-          <div className="w-10 h-1 rounded-full bg-muted-foreground/30" />
-        </div>
-
         {/* ── Header ── */}
-        <div className={`${program.color} relative flex-shrink-0 sm:rounded-t-3xl overflow-hidden`}>
+        <div className={`${program.color} relative flex-shrink-0 rounded-t-3xl overflow-hidden`}>
           {/* Close button */}
           <button
             onClick={onClose}
