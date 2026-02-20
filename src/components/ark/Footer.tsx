@@ -1,4 +1,5 @@
 import { Phone, MessageCircle, MapPin, Mail, Instagram, Youtube, Facebook } from "lucide-react";
+import arkLogo from "@/assets/ark-logo.jpeg";
 
 const footerLinks = {
   Programs: [
@@ -21,9 +22,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 rounded-xl bg-ark-yellow flex items-center justify-center font-black text-ark-navy text-xl shadow-yellow">
-                ARK
-              </div>
+              <img
+                src={arkLogo}
+                alt="ARK Learning Arena Logo"
+                className="w-12 h-12 rounded-xl object-cover shadow-yellow"
+              />
               <div>
                 <div className="text-white font-black text-lg">ARK Learning Arena</div>
                 <div className="text-ark-yellow text-xs tracking-wider">WHERE DISCIPLINE MEETS DIRECTION</div>
