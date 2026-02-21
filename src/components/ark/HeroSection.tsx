@@ -7,7 +7,7 @@ const checks = [
   "Weekly Testing System",
   "Parent Transparency Reports",
   "Performance Analytics",
-  "NCERT-Based NEET Coaching",
+  "NCERT-Based Curriculum",
 ];
 
 export default function HeroSection() {
@@ -61,7 +61,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-lg md:text-xl text-white/75 mb-4 font-medium"
             >
-              NEET Coaching · Board Excellence · Structured Mentorship
+              From Nestlings to NEET – Structured Academic Growth at Every Stage.
             </motion.p>
 
             <motion.p
@@ -70,7 +70,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.35 }}
               className="text-white/60 mb-8 max-w-lg leading-relaxed"
             >
-              At ARK Learning Arena, we build confident, capable, and future-ready students through disciplined systems, expert faculty, and measurable results — from Class 6 to NEET qualification.
+              ARK Learning Arena is a structured academic performance system built to create measurable improvement — from Class 6 tuition to NEET qualification.
             </motion.p>
 
             <motion.div
@@ -84,7 +84,7 @@ export default function HeroSection() {
                 className="bg-ark-yellow text-ark-navy font-bold hover:bg-ark-yellow-light shadow-yellow group px-8 text-base"
                 onClick={() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })}
               >
-                Book Free Assessment
+                Book Free Academic Assessment
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
@@ -93,9 +93,18 @@ export default function HeroSection() {
                 className="border-white/30 text-white hover:bg-white/10 hover:border-white group px-8 text-base bg-transparent"
               >
                 <Download className="mr-2 w-5 h-5" />
-                Download Prospectus
+                Download Academic Planner
               </Button>
             </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-white/50 text-sm mb-8 -mt-6"
+            >
+              Free diagnostic test. No obligation.
+            </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -127,24 +136,6 @@ export default function HeroSection() {
                 className="relative w-full max-w-md lg:max-w-lg rounded-3xl object-cover animate-float"
                 style={{ maxHeight: "520px" }}
               />
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8, duration: 0.4 }}
-                className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-4 py-3 shadow-card-hover"
-              >
-                <div className="text-2xl font-black text-ark-navy">80%</div>
-                <div className="text-xs text-muted-foreground font-semibold">NEET Qualification</div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1, duration: 0.4 }}
-                className="absolute -top-4 -right-4 bg-ark-yellow rounded-2xl px-4 py-3 shadow-yellow"
-              >
-                <div className="text-2xl font-black text-ark-navy">3</div>
-                <div className="text-xs text-ark-navy font-semibold">Govt. Seats</div>
-              </motion.div>
             </div>
           </motion.div>
         </div>
