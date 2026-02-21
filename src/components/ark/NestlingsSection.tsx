@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Shield, Clock, Utensils, BookOpen, Palette, Heart, CalendarCheck, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import nestlingsImage from "@/assets/nestlings-care.jpg";
 
 const trustSignals = [
   { icon: Shield, label: "Safe Supervised Environment", description: "CCTV-monitored, secure campus with trained supervisors" },
@@ -47,6 +48,22 @@ export default function NestlingsSection() {
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
             When parents are at work or need personal time, ARK ensures your child is cared for, guided, and academically supported — in a safe, structured environment.
           </p>
+        </motion.div>
+
+        {/* Hero Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-14 rounded-3xl overflow-hidden shadow-lg max-w-4xl mx-auto"
+        >
+          <img
+            src={nestlingsImage}
+            alt="Children studying in a warm, supervised after-school care environment with a caring mentor"
+            className="w-full h-auto object-cover"
+            loading="lazy"
+          />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
