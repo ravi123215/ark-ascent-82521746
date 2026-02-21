@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Download, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroStudent from "@/assets/hero-student.jpg";
 
@@ -61,7 +61,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-lg md:text-xl text-white/75 mb-4 font-medium"
             >
-              From Nestlings to NEET – Structured Academic Growth at Every Stage.
+              From After-School Care to NEET Coaching — Structured Academic & Life Support for Every Stage.
             </motion.p>
 
             <motion.p
@@ -70,14 +70,14 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.35 }}
               className="text-white/60 mb-8 max-w-lg leading-relaxed"
             >
-              ARK Learning Arena is a structured academic performance system built to create measurable improvement — from Class 6 tuition to NEET qualification.
+              ARK Learning Arena provides safe after-school care, homework supervision, structured tuition, board preparation, and competitive coaching — all under one disciplined system.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-wrap gap-4 mb-10"
+              className="flex flex-wrap gap-4 mb-4"
             >
               <Button
                 size="lg"
@@ -90,10 +90,11 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 hover:border-white group px-8 text-base bg-transparent"
+                className="border-ark-pink/40 text-white hover:bg-ark-pink/15 hover:border-ark-pink group px-8 text-base bg-transparent"
+                onClick={() => document.getElementById("nestlings")?.scrollIntoView({ behavior: "smooth" })}
               >
-                <Download className="mr-2 w-5 h-5" />
-                Download Academic Planner
+                Enquire About Nestlings
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
 
@@ -101,7 +102,7 @@ export default function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-white/50 text-sm mb-8 -mt-6"
+              className="text-white/50 text-sm mb-8"
             >
               Free diagnostic test. No obligation.
             </motion.p>

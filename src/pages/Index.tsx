@@ -1,5 +1,6 @@
 import Navbar from "@/components/ark/Navbar";
 import HeroSection from "@/components/ark/HeroSection";
+import NestlingsSection from "@/components/ark/NestlingsSection";
 import TrustStrip from "@/components/ark/TrustStrip";
 import ProgramsSection from "@/components/ark/ProgramsSection";
 import WhyARKSection from "@/components/ark/WhyARKSection";
@@ -15,12 +16,10 @@ import WhatsAppSticky from "@/components/ark/WhatsAppSticky";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Sticky Navigation */}
       <Navbar />
-
-      {/* Main Content */}
       <main>
         <HeroSection />
+        <NestlingsSection />
         <TrustStrip />
         <ProgramsSection />
         <WhyARKSection />
