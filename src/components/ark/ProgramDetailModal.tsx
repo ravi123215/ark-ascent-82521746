@@ -266,7 +266,7 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
                   <div className="mt-6 p-5 rounded-2xl bg-ark-navy text-white text-center">
                     <Award className="w-8 h-8 text-ark-yellow mx-auto mb-2" />
                     <p className="font-bold text-sm">Ready to achieve these results?</p>
-                    <p className="text-white/60 text-xs mt-1">Book a free academic assessment with our counsellors today.</p>
+                    <p className="text-white/60 text-xs mt-1">Book a free assessment with our counsellors today.</p>
                   </div>
                 </div>
               )}
@@ -281,7 +281,7 @@ function ModalContent({ program, onClose }: { program: ProgramDetail; onClose: (
               onClick={handleEnquiry}
               className="flex-1 bg-ark-yellow hover:bg-ark-yellow-light text-ark-navy font-black text-sm h-11 shadow-yellow rounded-xl"
             >
-              Book Free Academic Assessment
+              Book Free Assessment
             </Button>
             <a
               href={`https://wa.me/917639399217?text=${encodeURIComponent(`Hi, I'm interested in the ${program.title} program at ARK Learning Arena. Can you share more details?`)}`}

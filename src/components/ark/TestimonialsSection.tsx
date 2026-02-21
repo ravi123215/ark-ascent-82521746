@@ -5,7 +5,6 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 const testimonials = [
   {
     name: "Mrs. Kavitha Rajan",
-    avatar: "https://api.dicebear.com/6.x/initials/svg?seed=Kavitha%20Rajan&backgroundType=gradient&radius=50",
     role: "Parent of NEET 2024 Qualifier",
     text: "ARK transformed my daughter's approach to studies. The weekly tests and monthly parent reports gave us complete clarity on her progress. She qualified NEET in her first attempt!",
     rating: 5,
@@ -13,7 +12,6 @@ const testimonials = [
   },
   {
     name: "Arun Babu",
-    avatar: "https://api.dicebear.com/6.x/initials/svg?seed=Arun%20Babu&backgroundType=gradient&radius=50",
     role: "NEET 2024, AIR 6,102",
     text: "The discipline system at ARK was different from anywhere else I had studied. Every test was tracked, every weak area was remediated. The HRC concept mastery framework genuinely helped me secure 672 marks.",
     rating: 5,
@@ -21,7 +19,6 @@ const testimonials = [
   },
   {
     name: "Mrs. Priya Suresh",
-    avatar: "https://api.dicebear.com/6.x/initials/svg?seed=Priya%20Suresh&backgroundType=gradient&radius=50",
     role: "Parent of Board Topper",
     text: "The performance analytics and transparency at ARK is something you won't find at other coaching centres. We knew exactly where our son stood every single month. He scored 98% in boards.",
     rating: 5,
@@ -29,7 +26,6 @@ const testimonials = [
   },
   {
     name: "Deepika R.",
-    avatar: "https://api.dicebear.com/6.x/initials/svg?seed=Deepika%20R&backgroundType=gradient&radius=50",
     role: "Class 12 CBSE, 97%",
     text: "Small batches, dedicated teachers, and real individual attention. ARK didn't just prepare me for exams — it built my confidence and discipline. Forever grateful.",
     rating: 5,
@@ -37,7 +33,6 @@ const testimonials = [
   },
   {
     name: "Mr. Suresh Kumar",
-    avatar: "https://api.dicebear.com/6.x/initials/svg?seed=Suresh%20Kumar&backgroundType=gradient&radius=50",
     role: "Parent of NEET Qualifier",
     text: "Moving my son to ARK was the best academic decision we made. The structured system, accountability, and mentorship is unparalleled. He's now pursuing MBBS at a Government college.",
     rating: 5,
@@ -86,20 +81,8 @@ export default function TestimonialsSection() {
               <Quote className="w-8 h-8 text-ark-yellow mb-4" />
               <p className="text-muted-foreground text-sm leading-relaxed mb-5">{t.text}</p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full overflow-hidden bg-ark-navy flex items-center justify-center text-white font-bold text-sm">
-                  {t.avatar ? (
-                    <img
-                      src={t.avatar}
-                      alt={t.name}
-                      className="w-10 h-10 object-cover"
-                      onError={(e) => {
-                        // fallback to initials if image fails
-                        (e.currentTarget as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
-                  ) : (
-                    t.name[0]
-                  )}
+                <div className="w-10 h-10 rounded-full bg-ark-navy flex items-center justify-center text-white font-bold text-sm">
+                  {t.name[0]}
                 </div>
                 <div>
                   <div className="font-bold text-ark-navy text-sm">{t.name}</div>
@@ -132,19 +115,8 @@ export default function TestimonialsSection() {
               <Quote className="w-8 h-8 text-ark-yellow mb-4" />
               <p className="text-muted-foreground text-sm leading-relaxed mb-5">{testimonials[current].text}</p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full overflow-hidden bg-ark-navy flex items-center justify-center text-white font-bold text-sm">
-                  {testimonials[current].avatar ? (
-                    <img
-                      src={testimonials[current].avatar}
-                      alt={testimonials[current].name}
-                      className="w-10 h-10 object-cover"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
-                  ) : (
-                    testimonials[current].name[0]
-                  )}
+                <div className="w-10 h-10 rounded-full bg-ark-navy flex items-center justify-center text-white font-bold text-sm">
+                  {testimonials[current].name[0]}
                 </div>
                 <div>
                   <div className="font-bold text-ark-navy text-sm">{testimonials[current].name}</div>

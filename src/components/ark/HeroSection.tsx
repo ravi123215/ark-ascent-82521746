@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Download, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroStudent from "@/assets/founder.jpg";
+import heroStudent from "@/assets/hero-student.jpg";
 
 const checks = [
   "Weekly Testing System",
@@ -61,25 +61,16 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-lg md:text-xl text-white/75 mb-4 font-medium"
             >
-              From Nestlings to NEET – Structured Academic Growth
+              NEET Coaching · Board Excellence · Structured Mentorship
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="text-white/60 mb-4 max-w-lg leading-relaxed"
-            >
-              At ARK Learning Arena, we operate a disciplined academic performance system designed to create measurable improvement at every stage.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.38 }}
               className="text-white/60 mb-8 max-w-lg leading-relaxed"
             >
-              We build confident, capable, and future-ready students through disciplined systems, expert faculty, and measurable results — from Class 6 to NEET qualification.
+              At ARK Learning Arena, we build confident, capable, and future-ready students through disciplined systems, expert faculty, and measurable results — from Class 6 to NEET qualification.
             </motion.p>
 
             <motion.div
@@ -93,7 +84,7 @@ export default function HeroSection() {
                 className="bg-ark-yellow text-ark-navy font-bold hover:bg-ark-yellow-light shadow-yellow group px-8 text-base"
                 onClick={() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })}
               >
-                Book Free Academic Assessment
+                Book Free Assessment
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
@@ -102,12 +93,8 @@ export default function HeroSection() {
                 className="border-white/30 text-white hover:bg-white/10 hover:border-white group px-8 text-base bg-transparent"
               >
                 <Download className="mr-2 w-5 h-5" />
-                Download Academic Planner
+                Download Prospectus
               </Button>
-            </motion.div>
-
-            <motion.div className="mb-6">
-              <div className="text-sm text-white/70">Free diagnostic assessment. No obligation.</div>
             </motion.div>
 
             <motion.div
@@ -140,17 +127,23 @@ export default function HeroSection() {
                 className="relative w-full max-w-md lg:max-w-lg rounded-3xl object-cover animate-float"
                 style={{ maxHeight: "520px" }}
               />
-              {/* Removed floating 80% stat from hero to reduce competition with main message.
-                  Stat remains in TrustStrip below for better hierarchy. */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8, duration: 0.4 }}
+                className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-4 py-3 shadow-card-hover"
+              >
+                <div className="text-2xl font-black text-ark-navy">80%</div>
+                <div className="text-xs text-muted-foreground font-semibold">NEET Qualification</div>
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1, duration: 0.4 }}
-                className="absolute top-4 right-4 bg-ark-yellow rounded-2xl px-4 py-3 shadow-yellow text-right"
+                className="absolute -top-4 -right-4 bg-ark-yellow rounded-2xl px-4 py-3 shadow-yellow"
               >
                 <div className="text-2xl font-black text-ark-navy">3</div>
                 <div className="text-xs text-ark-navy font-semibold">Govt. Seats</div>
-                <div className="text-xxs text-ark-navy/80 mt-1">Last Academic Year</div>
               </motion.div>
             </div>
           </motion.div>
