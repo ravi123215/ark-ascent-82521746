@@ -10,6 +10,8 @@ const checks = [
   "NCERT-Based Curriculum",
 ];
 
+const ecosystemBadges = ["Nestlings", "Tuition", "Board Prep", "NEET Coaching", "Summer Camp"];
+
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen bg-gradient-hero overflow-hidden flex items-center pt-20">
@@ -38,7 +40,7 @@ export default function HeroSection() {
             >
               <span className="w-2 h-2 rounded-full bg-ark-yellow animate-pulse-glow" />
               <span className="text-ark-yellow text-sm font-semibold tracking-wide">
-                Chennai's Premier Academic Institution
+                Chennai's Structured Academic & Care Ecosystem
               </span>
             </motion.div>
 
@@ -61,16 +63,25 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-lg md:text-xl text-white/75 mb-4 font-medium"
             >
-              From After-School Care to NEET Coaching — Structured Academic & Life Support for Every Stage.
+              From Nestlings to NEET — Structured Academic Growth at Every Stage.
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="text-white/60 mb-8 max-w-lg leading-relaxed"
+              className="text-white/60 mb-4 max-w-lg leading-relaxed"
             >
-              ARK Learning Arena provides safe after-school care, homework supervision, structured tuition, board preparation, and competitive coaching — all under one disciplined system.
+              ARK Learning Arena is a structured academic performance system built to create measurable improvement — from Class 6 tuition to NEET qualification.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.38 }}
+              className="text-white/50 text-sm italic mb-8 max-w-lg border-l-2 border-ark-yellow/40 pl-4"
+            >
+              At ARK Learning Arena, we operate a structured academic performance system designed to create disciplined, measurable improvement.
             </motion.p>
 
             <motion.div
@@ -93,7 +104,7 @@ export default function HeroSection() {
                 className="border-ark-pink/40 text-white hover:bg-ark-pink/15 hover:border-ark-pink group px-8 text-base bg-transparent"
                 onClick={() => document.getElementById("nestlings")?.scrollIntoView({ behavior: "smooth" })}
               >
-                Enquire About Nestlings
+                Enquire About After-School Care
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
@@ -118,6 +129,23 @@ export default function HeroSection() {
                   <CheckCircle2 className="w-5 h-5 text-ark-yellow flex-shrink-0" />
                   <span className="text-white/80 text-sm font-medium">{item}</span>
                 </div>
+              ))}
+            </motion.div>
+
+            {/* Ecosystem Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className="flex flex-wrap gap-2 mt-6"
+            >
+              {ecosystemBadges.map((badge) => (
+                <span
+                  key={badge}
+                  className="bg-white/10 border border-white/20 text-white/80 text-xs font-semibold px-3 py-1.5 rounded-full"
+                >
+                  {badge}
+                </span>
               ))}
             </motion.div>
           </div>
