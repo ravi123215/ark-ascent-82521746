@@ -42,11 +42,13 @@ const features = [
 
 const flowSteps = [
   { label: "Student Joins", num: "01" },
-  { label: "Weekly Test", num: "02" },
-  { label: "Performance Analysis", num: "03" },
-  { label: "Parent Report", num: "04" },
-  { label: "Remedial / Advance", num: "05" },
-  { label: "Measurable Growth", num: "06" },
+  { label: "ADA Taken & SWOT Analysis Done", num: "02" },
+  { label: "Tutoring & Mentoring", num: "03" },
+  { label: "Weekly Test", num: "04" },
+  { label: "Performance Analysis", num: "05" },
+  { label: "Parent Report", num: "06" },
+  { label: "Remedial / Advance", num: "07" },
+  { label: "Measurable Growth", num: "08" },
 ];
 
 export default function WhyARKSection() {
