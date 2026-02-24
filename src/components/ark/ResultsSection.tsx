@@ -1,7 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Trophy, Medal, Star, TrendingUp, GraduationCap } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const neetToppers = [
   { student: "Priya S.", score: 680, total: 720, rank: "AIR 4,821", achievement: "Govt. Medical Seat", year: "2024" },
@@ -120,7 +122,8 @@ export default function ResultsSection() {
             <h3 className="text-2xl font-black text-white">NEET Toppers 2024</h3>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Desktop grid view */}
+          <div className="hidden lg:grid grid-cols-4 gap-4">
             {neetToppers.map((topper, i) => (
               <motion.div
                 key={topper.student}
@@ -157,6 +160,62 @@ export default function ResultsSection() {
               </motion.div>
             ))}
           </div>
+
+          {/* Mobile carousel view */}
+          <div className="lg:hidden">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 4000,
+                  stopOnInteraction: true,
+                }),
+              ]}
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {neetToppers.map((topper, i) => (
+                  <CarouselItem key={topper.student} className="pl-2 md:pl-4 basis-full sm:basis-1/2">
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.12 }}
+                      className="bg-white/[0.08] backdrop-blur-sm border border-white/15 rounded-2xl p-5 text-white hover:bg-white/[0.14] transition-all duration-300 group h-full"
+                    >
+                      {/* Rank badge */}
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-xs font-bold text-ark-navy bg-ark-yellow px-3 py-1 rounded-full flex items-center gap-1">
+                          <Trophy className="w-3 h-3" />
+                          #{i + 1}
+                        </span>
+                        <span className="text-ark-yellow/80 text-xs font-semibold">{topper.rank}</span>
+                      </div>
+
+                      {/* Animated circular score */}
+                      <div className="flex justify-center mb-4">
+                        <AnimatedScore score={topper.score} total={topper.total} delay={i * 0.15} />
+                      </div>
+
+                      {/* Student info */}
+                      <div className="text-center">
+                        <div className="font-bold text-white text-lg group-hover:text-ark-yellow transition-colors">{topper.student}</div>
+                        <div className="text-white/50 text-sm mt-0.5">NEET {topper.year}</div>
+                        <div className="mt-3 text-[11px] font-semibold text-ark-pink bg-ark-pink/15 px-3 py-1 rounded-full inline-flex items-center gap-1">
+                          <TrendingUp className="w-3 h-3" />
+                          {topper.achievement}
+                        </div>
+                      </div>
+                    </motion.div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="flex -left-4 md:-left-8 lg:-left-12 bg-ark-yellow/20 hover:bg-ark-yellow/40 border-ark-yellow/50 text-ark-yellow h-10 w-10" />
+              <CarouselNext className="flex -right-4 md:-right-8 lg:-right-12 bg-ark-yellow/20 hover:bg-ark-yellow/40 border-ark-yellow/50 text-ark-yellow h-10 w-10" />
+            </Carousel>
+          </div>
         </motion.div>
 
         {/* Board Toppers */}
@@ -173,7 +232,8 @@ export default function ResultsSection() {
             <h3 className="text-2xl font-black text-white">Board Toppers</h3>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Desktop grid view */}
+          <div className="hidden lg:grid grid-cols-4 gap-4">
             {boardToppers.map((topper, i) => (
               <motion.div
                 key={topper.student}
@@ -195,6 +255,48 @@ export default function ResultsSection() {
                 <div className="text-white/50 text-sm">{topper.program}</div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Mobile carousel view */}
+          <div className="lg:hidden">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                Autoplay({
+                  delay: 4000,
+                  stopOnInteraction: true,
+                }),
+              ]}
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {boardToppers.map((topper, i) => (
+                  <CarouselItem key={topper.student} className="pl-2 md:pl-4 basis-full sm:basis-1/2">
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.12 }}
+                      className="bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-2xl p-5 text-white hover:bg-white/[0.12] transition-all duration-300 group h-full"
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <Star className="w-5 h-5 text-ark-yellow" />
+                        <span className="text-xs font-bold text-ark-pink bg-ark-pink/15 px-3 py-1 rounded-full">
+                          {topper.achievement}
+                        </span>
+                      </div>
+                      <div className="text-4xl font-black text-ark-yellow mb-2">{topper.score}</div>
+                      <div className="font-bold text-white text-lg group-hover:text-ark-yellow transition-colors">{topper.student}</div>
+                      <div className="text-white/50 text-sm">{topper.program}</div>
+                    </motion.div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="flex -left-4 md:-left-8 lg:-left-12 bg-ark-pink/20 hover:bg-ark-pink/40 border-ark-pink/50 text-ark-pink h-10 w-10" />
+              <CarouselNext className="flex -right-4 md:-right-8 lg:-right-12 bg-ark-pink/20 hover:bg-ark-pink/40 border-ark-pink/50 text-ark-pink h-10 w-10" />
+            </Carousel>
           </div>
         </motion.div>
       </div>
