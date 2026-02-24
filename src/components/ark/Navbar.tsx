@@ -115,6 +115,14 @@ export default function Navbar() {
               <Phone className="w-4 h-4" />
               <span>+91 76393 99217</span>
             </a>
+            <a
+              href="https://ark-learning-hub.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-10 px-4 rounded-md border border-ark-yellow text-ark-yellow font-bold text-sm hover:bg-ark-yellow hover:text-ark-navy transition-colors"
+            >
+              Partner With ARK
+            </a>
             <Button
               className="bg-ark-yellow text-ark-navy font-bold hover:bg-ark-yellow-light shadow-yellow px-5"
               onClick={() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })}
