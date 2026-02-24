@@ -4,10 +4,10 @@ import { useCountUp } from "@/hooks/useCountUp";
 
 const stats = [
   { value: 80, suffix: "%", label: "NEET Qualification Rate", color: "text-ark-yellow" },
-  { value: 3, suffix: "+", label: "Government Medical Seats", color: "text-ark-pink" },
-  { value: 500, suffix: "+", label: "Students Coached", color: "text-ark-yellow" },
+  { value: 60, suffix: "%", label: "Government Medical Seats", color: "text-ark-pink" },
+  { value: 1000, suffix: "+", label: "Students Coached", color: "text-ark-yellow" },
   { value: 95, suffix: "%", label: "Board Distinction Rate", color: "text-ark-pink" },
-  { value: 7, suffix: "+", label: "Years of Excellence", color: "text-ark-yellow" },
+  { value: 10, suffix: "+", label: "Years of Excellence", color: "text-ark-yellow" },
   { value: 100, suffix: "%", label: "Academic Discipline", color: "text-ark-pink" },
 ];
 
