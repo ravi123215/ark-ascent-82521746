@@ -117,7 +117,16 @@ export default function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMobileOpen(false);
+                      const target = link.href === "#" ? document.body : document.querySelector(link.href);
+                      if (target) {
+                        setTimeout(() => {
+                          target.scrollIntoView({ behavior: "smooth" });
+                        }, 300);
+                      }
+                    }}
                     className="py-3 px-4 text-white/90 hover:text-ark-yellow hover:bg-white/5 rounded-lg font-medium transition-colors"
                   >
                     {link.label}
